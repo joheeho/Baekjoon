@@ -1,10 +1,11 @@
 from collections import deque
-t=int(input())
+import sys 
+t= int(sys.stdin.readline())
 for i in range(t):
     out_count=0
     deque1=deque()
-    count,locate=map(int,input().split())
-    importance=list(map(int,input().split()))
+    count,locate=map(int, sys.stdin.readline().split())
+    importance=list(map(int, sys.stdin.readline().split()))
     importance1=importance[:]
     if len(importance)==len(set(importance)): # 놓인 순서도의 중복이 없을 경우
         target=importance[locate]      # 구하려는 값의 중요도 
