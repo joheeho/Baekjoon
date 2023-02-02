@@ -3,7 +3,9 @@ n, m, b = map(int, sys.stdin.readline().split())
 arr = [list(map(int, sys.stdin.readline().split())) for _ in range(n)]
 answer = sys.maxsize
 time=0
-for now_zone in range(257):
+high=max(map(max, arr))
+low=min(map(min, arr))
+for now_zone in range(low,high+1):
     add,broke=0,0
     for x in range(n):
         for y in range(m):
