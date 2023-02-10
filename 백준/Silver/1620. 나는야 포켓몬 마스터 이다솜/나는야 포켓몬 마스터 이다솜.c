@@ -1,55 +1,79 @@
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
-#include <ctype.h>
+#include <string.h>
 
-typedef struct Poketmonster // 포켓 몬스터 구조체를 만들기
+
+typedef struct
 {
 	int num;
 	char name[21];
-} Poketmonster;
+}pokemon;
 
-Poketmonster secondary_list[100000][21];  
-Poketmonster sorted_secondary_list[100000][21];
-
-int compare(const void* A, const void* B)
+int cmp(const void* a, const void* b)
 {
-	Poketmonster* a = (Poketmonster*)A;
-	Poketmonster* b = (Poketmonster*)B;
-
-	return strcmp(a->name, b->name);
+	pokemon *na = (pokemon*)a;
+	pokemon *nb = (pokemon*)b;
+	if (strcmp(na->name, nb->name) > 0)
+        return 1;
+    else
+        return -1;
 }
 
-int main()
+int main(void)
 {
-	int n, m;
+	int n, m,i;
+    pokemon* pokemon_index= NULL;
+    pokemon* pokemon_index_C = NULL;
+	char op[21];
+    scanf("%d %d", &n, &m);
 
-	char tmp_name[21];
-	Poketmonster command;
-
-	scanf("%d %d", &n, &m);
+	pokemon_index   = (pokemon*)malloc(sizeof(pokemon) * n);
+	pokemon_index_C = (pokemon*)malloc(sizeof(pokemon) * n);
 
 	for (int i = 0; i < n; i++)
 	{
-		scanf("%s", tmp_name);
-		strcpy(secondary_list[i]->name, tmp_name);
-		strcpy(sorted_secondary_list[i]->name, tmp_name);
-		secondary_list[i]->num = i;
-		sorted_secondary_list[i] ->num = i;
+		scanf("%s", pokemon_index[i].name);
+		pokemon_index[i].num = pokemon_index_C[i].num = i + 1;
+		pokemon_index_C[i] = pokemon_index[i];
 	}
 
-	qsort(sorted_secondary_list, n, sizeof(sorted_secondary_list[0]), compare);
+	qsort(pokemon_index_C, n, sizeof(pokemon_index_C[0]), cmp);
 
-	for (int i = 0; i < m; i++)
+	for (i = 0; i < m; i++)
 	{
-		scanf("%s", command.name);
-		if (isdigit(command.name[0]))
-			printf("%s\n", secondary_list[atoi(command.name) - 1]->name);
+		scanf("%s", op);
+
+		if (op[0] >= '0' && op[0] <= '9')
+		{
+			int num1 = atoi(op);
+			printf("%s\n", pokemon_index[num1 - 1].name);
+		}
 		else
 		{
-			Poketmonster* monster = (Poketmonster*)bsearch(&command, sorted_secondary_list, n, sizeof(sorted_secondary_list[i]), compare);
-			printf("%d\n", monster->num + 1);
+            int mid;
+			int low = 0, high = n - 1;
+			while (low <= high)
+			{
+                mid = (low + high) / 2;
+				if (strcmp(pokemon_index_C[mid].name, op) == 0)
+				{
+                    printf("%d\n", pokemon_index_C[mid].num);
+					break;
+				}
+				else if (strcmp(pokemon_index_C[mid].name, op) > 0)
+				{
+					high = mid - 1;
+				}
+				else
+				{
+					low = mid + 1;
+				}
+			}
 		}
 	}
+
+	free(pokemon_index);
+	free(pokemon_index_C);
+
 	return 0;
 }

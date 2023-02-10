@@ -4,7 +4,7 @@
 
 ### 성능 요약
 
-메모리: 117524 KB, 시간: 216 ms
+메모리: 9324 KB, 시간: 120 ms
 
 ### 분류
 
@@ -110,7 +110,7 @@
 
 <p><img alt="" src="https://www.acmicpc.net/upload/201004/ph.PNG" style="height:184px; width:274px"></p>
 
-<p><img alt="" src="https://www.acmicpc.net/upload/201004/pi.PNG" style="height:184px; width:274px"></p>
+<p><img alt="" src="" style="height:184px; width:274px"></p>
 
 <p>이다솜 : 휴... 이겼다.</p>
 
