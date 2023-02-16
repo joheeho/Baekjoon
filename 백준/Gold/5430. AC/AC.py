@@ -14,13 +14,16 @@ for i in range(t):
         if x=='R':
             reverse_count+=1
         else:
-            if len(string)==0:
-                print("error")
-                error=1
-                break
-            else:
-                if reverse_count%2==0:
+            if reverse_count%2==0:
+                if len(string)==0:
+                    print("error")
+                    break
+                else:
                     string.popleft()
+            else:
+                if len(string)==0:
+                    print("error")
+                    break
                 else:
                     string.pop()
     else:
