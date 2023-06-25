@@ -1,22 +1,20 @@
 #include <stdio.h>
 
-int main(void)
+int main()
 {
     int t, h, w, n;
     
     scanf("%d", &t);
     
-    for(int i = 0; i < t; i++)
+    for (int i = 0; i < t; i++)
     {
         scanf("%d %d %d", &h, &w, &n);
-        if(n % h == 0)
-        {
-            printf("%d%02d\n", h, n / h);
-        }
-        else
-        {
-            printf("%d%02d\n", n % h, n / h + 1);
-        }
+        
+        int x = (n - 1) % h + 1;  // 층 수 계산
+        int y = (n - 1) / h + 1;  // 호 수 계산
+        
+        printf("%d%02d\n", x, y);
     }
+    
     return 0;
 }
