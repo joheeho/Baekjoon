@@ -1,31 +1,26 @@
 n = int(input())
-students = list(map(int, input().split()))
+data = list(map(int,input().split()))
+stack = [ ]
+num = 1
 
-stack = []
-expected_order = 1
-
-for student in students:
-    # 스택이 비어있지 않고, 스택의 맨 위 값이 기대하는 순서와 같으면
-    while stack and stack[-1] == expected_order:
+for i in range(1,n+1):
+    x = data[i-1]
+    while  ( stack != [] and stack [-1] == num):
         stack.pop()
-        expected_order += 1
-
-    # 현재 학생이 기대하는 순서와 같으면 기대하는 순서 증가
-    if student == expected_order:
-        expected_order += 1
+        num +=1
+    if data[i-1]== num:
+        num+=1
     else:
-        stack.append(student)
+        stack.append(x)
 
-# 스택에 남아있는 값들을 처리
 while stack:
-    if stack[-1] == expected_order:
+    if stack[-1] == num:
         stack.pop()
-        expected_order += 1
+        num += 1
     else:
         break
 
-# 모든 학생이 기대하는 순서로 줄을 세울 수 있는 경우 "Nice", 아니면 "Sad" 출력
-if expected_order - 1 == n:
+if num - 1 == n:
     print("Nice")
 else:
     print("Sad")
